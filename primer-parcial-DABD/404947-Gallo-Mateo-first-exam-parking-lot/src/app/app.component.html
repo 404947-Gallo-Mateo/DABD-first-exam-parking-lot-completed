@@ -1,0 +1,9 @@
+<div class="container-fluid">
+  @if (showForm){
+      <app-parking-slot-form (onReturn)="alterView()"></app-parking-slot-form>
+  }
+
+  @if (showSlots){
+      <app-parking-view (onNew)="alterView()"></app-parking-view>
+  }
+</div>

@@ -1,0 +1,151 @@
+<form #form="ngForm" class="row g-3 was-validated" novalidate>
+
+    <div class="col-md-4">
+      <label for="inputModel" class="form-label">Modelo</label>
+      <input type="text" class="form-control" id="inputModel" name="inputModel"
+             required
+             minlength="3"
+             maxlength="50"
+             #inputModel="ngModel"
+             [(ngModel)]="vehicleAccess.model"
+             [ngClass]="{
+               'is-invalid': inputModel.invalid && (inputModel.dirty || inputModel.touched),
+               'is-valid': inputModel.valid && (inputModel.dirty || inputModel.touched)
+             }"
+      />
+      @if (inputModel.invalid && (inputModel.dirty || inputModel.touched)){
+        <div class="form-text text-danger">
+          @if (inputModel.errors?.['required']) {
+            <div>Modelo es requerido.</div>
+          }
+          @if (inputModel.errors?.['minlength']) {
+            <div>Minimo 3 caracteres</div>
+          }
+        </div>                
+      }
+      @if (inputModel.valid && (inputModel.dirty || inputModel.touched)){
+        <div class="form-text text-success"></div>                
+      }  
+    </div>
+  
+    <div class="col-md-4">
+      <label for="inputDomain" class="form-label">Dominio</label>
+      <input type="text" class="form-control" id="inputDomain" name="inputDomain"
+             required
+             minlength="6"
+             maxlength="7"
+             #inputDomain="ngModel"
+             [(ngModel)]="vehicleAccess.domain"
+             [ngClass]="{
+               'is-invalid': inputDomain.invalid && (inputDomain.dirty || inputDomain.touched),
+               'is-valid': inputDomain.valid && (inputDomain.dirty || inputDomain.touched)
+             }"
+      />
+      @if (inputDomain.invalid && (inputDomain.dirty || inputDomain.touched)){
+        <div class="form-text text-danger">
+          @if (inputDomain.errors?.['required']) {
+            <div>Modelo es requerido.</div>
+          }
+          @if (inputDomain.errors?.['minlength']) {
+            <div>Minimo 6 caracteres</div>
+          }
+          @if (inputDomain.errors?.['maxlength']) {
+            <div>Max 7 caracteres</div>
+          }
+        </div>                
+      }
+      @if (inputModel.valid && (inputModel.dirty || inputModel.touched)){
+        <div class="form-text text-success"></div>                
+      }  
+    </div>
+  
+    <!-- <div class="col-md-6">
+      <label for="checkInInputTime" class="form-label">Ingreso</label>
+      <input type="date" class="form-control" id="checkInInputTime" />
+      <div class="invalid-feedback">Mensaje validacion.</div>
+    </div> -->
+  
+    <div class="mb-3 form-group col-md-6">
+      <label for="checkInInputTime" class="form-label">Ingreso</label>
+      <input name="checkInInputTime" type="datetime-local" class="form-control" id="checkInInputTime" name="checkInInputTime" 
+             required
+             #checkInInputTime="ngModel"
+             [(ngModel)]="vehicleAccess.access"
+             [ngClass]="{
+               'is-invalid': checkInInputTime.invalid && (checkInInputTime.dirty || checkInInputTime.touched),
+               'is-valid': checkInInputTime.valid && (checkInInputTime.dirty || checkInInputTime.touched)
+             }"
+      >
+        @if (checkInInputTime.invalid && (checkInInputTime.dirty || checkInInputTime.touched)){
+          <div class="form-text text-danger"></div>                
+        } 
+        @if (checkInInputTime.valid && (checkInInputTime.dirty || checkInInputTime.touched)){
+          <div class="form-text text-success"></div>                
+        }
+    </div>
+  
+    <div class="col-md-3">
+      <label for="brandSelect" class="form-label">Marca</label>
+      <select class="form-select" id="brandSelect" name="brandSelect"
+              required
+              #brandSelect="ngModel"
+              [(ngModel)]="vehicleAccess.brand"
+              [ngClass]="{
+                'is-invalid': brandSelect.invalid && (brandSelect.dirty || brandSelect.touched),
+                'is-valid': brandSelect.valid && (brandSelect.dirty || brandSelect.touched)
+              }"
+      >
+        @for(brand of brands; track brand){
+          <option [value]="brand.id">{{brand.name}}</option>
+        }
+      </select>
+          @if (brandSelect.invalid && (brandSelect.dirty || brandSelect.touched)){
+            <div class="form-text text-danger"></div>                
+          } 
+          @if (brandSelect.valid && (brandSelect.dirty || brandSelect.touched)){
+            <div class="form-text text-success"></div>                
+          }  
+    </div>
+  
+    <div class="col-md-3">
+      <label for="vehiculeTypeTypeSelect" class="form-label">Tipo Vehiculo</label>
+      <select class="form-select" id="vehicleTypeSelect" name="vehicleTypeSelect"
+              required
+              #vehiculeTypeTypeSelect="ngModel"
+              [(ngModel)]="vehicleAccess.typeVehicle"
+              [ngClass]="{
+                'is-invalid': vehiculeTypeTypeSelect.invalid && (vehiculeTypeTypeSelect.dirty || vehiculeTypeTypeSelect.touched),
+                'is-valid': vehiculeTypeTypeSelect.valid && (vehiculeTypeTypeSelect.dirty || vehiculeTypeTypeSelect.touched)
+              }"
+      >
+        @for(type of vehicleTypes; track type){
+          <option [value]="type">{{type}}</option>
+        }    
+      </select>
+        @if (brandSelect.invalid && (brandSelect.dirty || brandSelect.touched)){
+          <div class="form-text text-danger"></div>                
+        } 
+        @if (brandSelect.valid && (brandSelect.dirty || brandSelect.touched)){
+          <div class="form-text text-success"></div>                
+        }  
+    </div>
+  
+    <div class="col-12">
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" id="newDomainCheck" 
+               name="newDomainCheck"
+               #newDomainCheck="ngModel"
+               [(ngModel)]="vehicleAccess.newDomain"  
+        />
+        <label class="form-check-label" for="newDomainCheck"> 
+          Nuevo dominio?
+        </label>
+      </div>
+    </div>
+  
+    <div class="col-12">
+      <button class="btn btn-secondary me-1" (click)="return()">Cancelar</button>
+      <button class="btn btn-primary ms-1" (click)="registerNewAccess(form)" [disabled]="form.invalid" type="submit">Registrar ingreso</button>
+    </div>
+  </form>
+  

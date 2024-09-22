@@ -1,0 +1,12 @@
+.spaceAvailable{
+    border-color: rgb(1, 181, 1);
+    border-width: 1.5px;
+    border-style: solid;
+}
+
+.full{
+    border-color: rgb(239, 0, 0);
+    border-width: 1.5px;
+    border-style: solid;
+
+}
